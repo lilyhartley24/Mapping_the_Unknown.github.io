@@ -411,8 +411,8 @@
       chartContainer.html("");
 
       const chartWidth = chartContainer.node().getBoundingClientRect().width;
-      width = Math.max(560, Math.min(900, chartWidth - 24));
-      radius = width / 6;
+      width = Math.max(400, Math.min(650, chartWidth - 40));
+      radius = width / 7;
 
       const svg = chartContainer
         .append("svg")
