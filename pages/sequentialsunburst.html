@@ -53,7 +53,6 @@
       display: flex;
       justify-content: center;
       align-items: flex-start;
-      min-height: 760px;
       width: 100%;
       overflow: visible;
     }
@@ -410,17 +409,18 @@
     function drawSunburst(data, totalCount, totalRawCount) {
       chartContainer.html("");
 
-      const chartWidth = chartContainer.node().getBoundingClientRect().width;
-      width = Math.max(560, Math.min(900, chartWidth - 24));
-      radius = width / 6;
+      const chartWrap = document.querySelector(".chart-wrap");
+      const chartWidth = chartWrap ? chartWrap.getBoundingClientRect().width - 32 : 600;
+      width = Math.max(300, Math.min(chartWidth, chartWidth));
 
       const svg = chartContainer
         .append("svg")
-        .attr("width", width)
-        .attr("height", width)
+        .attr("width", "100%")
+        .attr("height", "100%")
         .attr("viewBox", `0 0 ${width} ${width}`)
-        .style("max-width", "100%")
+        .style("max-width", `${width}px`)
         .style("height", "auto")
+        .style('display", "block')
         .append("g")
         .attr("transform", `translate(${width / 2}, ${width / 2})`);
 
@@ -573,7 +573,8 @@ ${d.value.toFixed(2)} normalized value`;
 
       breadcrumb.text("Hover over a segment to see the sequence.");
 
-      drawSunburst(hierarchy, validRows, totalRawCount);
+      setTimeout(() => drawSunburst(hierarchy, validRows, totalRawCount), 50);
+
     }
 
         document.getElementById("resetView").addEventListener("click", () => {
